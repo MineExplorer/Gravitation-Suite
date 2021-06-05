@@ -1,0 +1,12 @@
+# Windows image file caches
+Thumbs.db
+
+.vscode/.ropeproject
+toolchain/build
+toolchain/temp
+output
+**/__pycache__
+**/tsconfig.json
+
+*.log
+*.icmod

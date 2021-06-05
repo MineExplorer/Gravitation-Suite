@@ -1,0 +1,10 @@
+{
+  "enabled":true,
+  "change_quantum_suit_recipe":true,
+  "change_ir_drill_recipe":true,
+  "energy_text":{
+    "scale":135,
+    "pos":"right",
+    "y":30
+  }
+}

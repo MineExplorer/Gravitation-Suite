@@ -1,0 +1,11 @@
+#allowJs: false
+header.ts
+translation.ts
+
+ui/**/*
+armor/**/*
+tool/**/*
+
+components.ts
+items.ts
+recipes.ts
