@@ -21,6 +21,7 @@
 			"nativejs"
 		],
 		"excludeFromRelease": [],
+		"modFolder": "GraviSuite",
 		"pushTo": "storage/emulated/0/games/horizon/packs/Inner_Core/innercore/mods/GraviSuite",
 		"ndkPath": null
 	},
