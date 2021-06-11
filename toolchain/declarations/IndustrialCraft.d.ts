@@ -796,30 +796,37 @@ declare namespace ToolHUD {
     function onClick(name: string): void;
 }
 declare namespace ToolHUD {
-    abstract class AbstractButton implements IHUDButton {
+    type ButtonUIData = {
+        position: number;
+        bitmap: string;
+        bitmap2?: string;
+        scale: number;
+        clicker?: UI.UIClickEvent;
+    };
+    export abstract class AbstractButton implements IHUDButton {
         name: string;
         type: "armor" | "tool";
+        uiData: ButtonUIData;
         uiElement: UI.UIButtonElement;
         bindedItems: any[];
-        constructor(name: string, type: "armor" | "tool");
+        constructor(name: string, type: "armor" | "tool", uiData: ButtonUIData);
         bindItem(id: number): void;
         isBindedItem(id: number): boolean;
         onClick(player: number): void;
         onUpdate(element: UI.UIButtonElement): void;
     }
+    export {};
 }
 declare namespace ToolHUD {
     class ButtonFly extends AbstractButton {
         isTouched: boolean;
         constructor();
-        uiElement: UI.UIButtonElement;
         onUpdate(): void;
     }
 }
 declare namespace ToolHUD {
     class ButtonHover extends AbstractButton {
         constructor();
-        uiElement: UI.UIButtonElement;
         onUpdate(element: UI.UIButtonElement): void;
         onClick(player: number): void;
     }
@@ -827,21 +834,18 @@ declare namespace ToolHUD {
 declare namespace ToolHUD {
     class ButtonJump extends AbstractButton {
         constructor();
-        uiElement: UI.UIButtonElement;
         onClick(player: number): void;
     }
 }
 declare namespace ToolHUD {
     class ButtonNightvision extends AbstractButton {
         constructor();
-        uiElement: UI.UIButtonElement;
         onClick(player: number): void;
     }
 }
 declare namespace ToolHUD {
     class ButtonToolMode extends AbstractButton {
         constructor();
-        uiElement: UI.UIButtonElement;
         onClick(player: number): void;
     }
 }

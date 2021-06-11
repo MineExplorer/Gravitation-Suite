@@ -1,19 +1,10 @@
 class GraviEngineButton extends ICore.UI.AbstractButton {
-	uiElement: UI.UIButtonElement = {
-		x: 0,
-		y: 1000,
-		type: "button",
-		bitmap: "button_gravi_off",
-		scale: 50,
-		clicker: {
-			onClick: () => {
-				ICore.UI.onClick(this.name);
-			}
-		}
-	}
-
 	constructor() {
-		super("gravi_engine", "armor");
+		super("gravi_engine", "armor", {
+			position: 1,
+			bitmap: "button_gravi_off",
+			scale: 50,
+		});
 	}
 
 	onClick(player: number) {
