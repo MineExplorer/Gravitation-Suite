@@ -1948,8 +1948,11 @@ declare class ItemBattery extends ItemElectric {
     onIconOverride(item: ItemInstance): Item.TextureData;
 }
 declare class ItemBatteryCharging extends ItemBattery {
+    readMode(extra: ItemExtraData): number;
     onNoTargetUse(item: ItemStack, player: number): void;
+    getModeTooltip(mode: number): string;
     onNameOverride(item: ItemInstance, name: string): string;
+    chargeItems(player: PlayerEntity, index: number, item: ItemInstance): void;
     static checkCharging(playerUid: number): void;
 }
 declare class UpgradeModule extends ItemCommon implements IUpgrade {
@@ -2267,8 +2270,6 @@ declare class DebugItem extends ItemElectric {
     onNameOverride(item: ItemInstance, name: string): string;
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;
 }
-declare namespace EUMeterGUI {
-}
 declare class EUMeterUpdatable {
     protected node: EnergyNode;
     container: ItemContainer;
@@ -2452,10 +2453,10 @@ declare class ItemMiningLaser extends ItemElectric implements IModeSwitchable {
     };
     constructor();
     readMode(extra: ItemExtraData): number;
+    getModeProperties(mode: number): any;
+    getModeName(mode: number): string;
     onNameOverride(item: ItemInstance, name: string): string;
     onModeSwitch(item: ItemInstance, player: number): void;
-    getModeData(mode: number): any;
-    getModeInfo(mode: number): string;
     makeShot(item: ItemInstance, player: number): void;
     onNoTargetUse(item: ItemStack, player: number): void;
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;

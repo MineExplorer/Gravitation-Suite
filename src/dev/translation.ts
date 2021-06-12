@@ -11,6 +11,7 @@ Translation.addTranslation("vajra", {en: "Vajra", ru: "Ваджра", zh: "金�
 Translation.addTranslation("advanced_diamond_drill", {en: "Advanced Diamond Drill", ru: "Улучшенный алмазный бур", zh: "进阶钻石电钻"});
 Translation.addTranslation("advanced_chainsaw", {en: "Advanced Chainsaw", ru: "Улучшенная электропила", zh: "进阶电锯"});
 Translation.addTranslation("gravi_tool", {en: "GraviTool", ru: "Гравитул", zh: "万能重力工具"});
+Translation.addTranslation("Hoe", {ru: "Мотыга", zh: "锄头"});
 
 Translation.addTranslation("gravi_chestplate", {en: "GraviChestplate", ru: "Гравитационный жилет", zh: "重力胸甲"});
 Translation.addTranslation("advanced_nano_chestplate", {en: "Advanced NanoChestplate", ru: "Улучшенный наножилет", zh: "进阶纳米重力胸甲"});

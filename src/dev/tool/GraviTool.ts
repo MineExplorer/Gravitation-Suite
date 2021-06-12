@@ -20,6 +20,23 @@ implements IWrech, IModeSwitchable {
 		return {name: this.icon.name, meta: mode};
 	}
 
+	getModeName(mode: number): string {
+		switch (mode) {
+			case 0:
+				return "Hoe"
+			case 1:
+				return "Treetap"
+			case 2:
+				return "Wrench"
+		}
+	}
+
+	onNameOverride(item: ItemInstance, name: string) {
+		let mode = this.readMode(item.extra);
+		name += ` (${Translation.translate(this.getModeName(mode))})`;
+		return super.onNameOverride(item, name);
+	}
+
 	onModeSwitch(item: ItemInstance, player: number): void {
 		let client = Network.getClientForPlayer(player);
 		let extra = item.extra || new ItemExtraData();
@@ -37,6 +54,7 @@ implements IWrech, IModeSwitchable {
 			break;
 		}
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
+		ICore.Sound.playSoundAtEntity(player, "ToolChange");
 	}
 
 	isUseable(item: ItemInstance, damage: number): boolean {
