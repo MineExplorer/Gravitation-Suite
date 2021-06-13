@@ -45,14 +45,14 @@ class GraviChestplate extends ArmorQuantumSuit {
 }
 
 let canFly = false;
-Callback.addCallback("LocalTick", function(){
+Callback.addCallback("LocalTick", function() {
 	let armor = Player.getArmorSlot(1);
 	if (Game.getGameMode() != 1) {
 		if (armor.id == ItemID.graviChestplate && armor.extra && armor.extra.getBoolean("fly")) {
 			Player.setFlyingEnabled(true);
 			canFly = true;
 		}
-		else if(canFly) {
+		else if (canFly) {
 			Player.setFlyingEnabled(false);
 			Player.setFlying(false);
 			canFly = false;

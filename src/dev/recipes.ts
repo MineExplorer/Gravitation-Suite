@@ -1,4 +1,4 @@
-Callback.addCallback("PreLoaded", function(){
+Callback.addCallback("PreLoaded", function() {
 	Recipes.addShaped({id: ItemID.advJetpack, count: 1, data: Item.getMaxDamage(ItemID.advJetpack)}, [
 		"cjc",
 		"bab",

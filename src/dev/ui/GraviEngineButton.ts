@@ -27,7 +27,7 @@ class GraviEngineButton extends ICore.UI.AbstractButton {
 
 	onUpdate(element: UI.UIButtonElement) {
 		let extra = Player.getArmorSlot(1).extra;
-		if (extra && extra.getBoolean("fly") ){
+		if (extra && extra.getBoolean("fly")) {
 			element.bitmap = "button_gravi_on";
 		} else {
 			element.bitmap = "button_gravi_off";
