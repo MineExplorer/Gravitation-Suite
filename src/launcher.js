@@ -5,7 +5,6 @@ ConfigureMultiplayer({
 ModAPI.addAPICallback("ICore", function(api){
   Launch({
 	  ICore: api,
-    BlockSide: Native.BlockSide,
     randomInt: api.requireGlobal("randomInt"),
     JetpackProvider: api.requireGlobal("JetpackProvider"),
     ArmorBatpack: api.requireGlobal("ArmorBatpack"),

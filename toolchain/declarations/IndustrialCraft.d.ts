@@ -1,17 +1,7 @@
-declare const GUI_SCALE = 3.2;
-declare const GUI_SCALE_NEW = 3;
-declare const fallVelocity = -0.0784;
-declare const ELECTRIC_ITEM_MAX_DAMAGE = 27;
-declare const Color: typeof globalAndroid.graphics.Color;
-declare const PotionEffect: typeof Native.PotionEffect;
-declare const ParticleType: typeof Native.ParticleType;
-declare const BlockSide: typeof Native.BlockSide;
-declare const EntityType: typeof Native.EntityType;
-declare const EU: EnergyType;
 declare function randomInt(min: number, max: number): number;
 declare function addShapelessRecipe(result: ItemInstance, source: ItemInstance[]): void;
 declare namespace Agriculture {
-    var NutrientBiomeBonus: {
+    let NutrientBiomeBonus: {
         21: number;
         22: number;
         23: number;
@@ -2466,7 +2456,7 @@ declare class CropAnalyser extends ItemCommon {
     constructor();
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;
     onNoTargetUse(item: ItemStack, player: number): void;
-    showCropValues(tileEntity: Agriculture.ICropTileEntity): void;
+    showCropValues(tileEntity: Agriculture.ICropTileEntity, player: number): void;
     setupContainer(container: ItemContainer): void;
     static clearInfo(container: ItemContainer): void;
     static moveBag(slotBagIn: ItemContainerSlot, slotBagOut: ItemContainerSlot): void;
@@ -2476,8 +2466,8 @@ declare class CropAnalyser extends ItemCommon {
     static energyForLevel(level: number): number;
     static getStringTier(tier: number): string;
 }
-declare const guiAddConst = 14;
-declare const guiAnalyserObject: UI.WindowContent;
+declare namespace CropAnalyserGUI {
+}
 declare class ItemWeedingTrowel extends ItemCommon {
     constructor();
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;
