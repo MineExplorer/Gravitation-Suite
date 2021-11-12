@@ -3,7 +3,8 @@ implements IModeSwitchable {
 	damage = 5;
 
 	constructor() {
-		super("vajra", "vajra", {energyPerUse: 3333, level: 100, efficiency: 1, damage: 20}, ["stone", "dirt", "wood"], 1e7, 20000, 4);
+		super("vajra", "vajra", 1e7, 20000, 4);
+		this.setToolParams({energyPerUse: 3333, level: 100, efficiency: 1, damage: 20, blockMaterials: ["stone", "dirt", "wood"]});
 		this.setRarity(EnumRarity.EPIC);
 		ICore.UI.setButtonFor(this.id, "button_switch");
 	}
