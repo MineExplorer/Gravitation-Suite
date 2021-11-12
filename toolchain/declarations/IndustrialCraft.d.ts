@@ -2332,7 +2332,7 @@ declare abstract class ElectricTool extends ItemElectric implements ToolParams {
         energyPerUse: number;
         level: number;
         efficiency: number;
-        damage: number;
+        damage?: number;
         blockMaterials?: string[];
     }): void;
     getEnergyPerUse(item: ItemInstance): number;
