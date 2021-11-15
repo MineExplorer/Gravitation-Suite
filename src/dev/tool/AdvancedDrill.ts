@@ -50,22 +50,22 @@ implements IModeSwitchable {
 
 	onNameOverride(item: ItemInstance, name: string): string {
 		name = super.onNameOverride(item, name);
-		let mode = this.readMode(item.extra);
-		let tooltip = this.getModeChatColor(mode) + Translation.translate("Mode: ") + Translation.translate(this.getModeName(mode));
+		const mode = this.readMode(item.extra);
+		const tooltip = this.getModeChatColor(mode) + Translation.translate("Mode: ") + Translation.translate(this.getModeName(mode));
 		return name + "\n" + tooltip;
 	}
 
 	onModeSwitch(item: ItemInstance, player: number): void {
-		let client = Network.getClientForPlayer(player);
-		let extra = item.extra || new ItemExtraData();
-		let mode = (extra.getInt("mode") + 1) % 4;
+		const client = Network.getClientForPlayer(player);
+		const extra = item.extra || new ItemExtraData();
+		const mode = (extra.getInt("mode") + 1) % 4;
 		extra.putInt("mode", mode);
 		BlockEngine.sendUnlocalizedMessage(client, this.getModeChatColor(mode), "Mode: ", this.getModeName(mode));
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
 	}
 
 	getOperationRadius(side: number): Vector {
-		let rad = {x: 1, y: 1, z: 1};
+		const rad = {x: 1, y: 1, z: 1};
 		if (side == BlockSide.EAST || side == BlockSide.WEST)
 			rad.x = 0;
 		if (side == BlockSide.UP || side == BlockSide.DOWN)
@@ -77,18 +77,18 @@ implements IModeSwitchable {
 
 	calcDestroyTime(item: ItemInstance, coords: Callback.ItemUseCoordinates, block: Tile, params: {base: number, devider: number, modifier: number}, destroyTime: number): number {
 		if (ChargeItemRegistry.getEnergyStored(item) >= this.getEnergyPerUse(item)) {
-			let mode = this.readMode(item.extra);
-			let material = ToolAPI.getBlockMaterialName(block.id);
+			const mode = this.readMode(item.extra);
+			const material = ToolAPI.getBlockMaterialName(block.id);
 			if (mode == 1) return destroyTime * 1.35;
 			if (mode == 2) return destroyTime * 2.7;
 			if (mode == 3 && (material == "dirt" || material == "stone")) {
 				let maxDestroyTime = 0;
-				let rad = this.getOperationRadius(coords.side);
+				const rad = this.getOperationRadius(coords.side);
 				for (let xx = coords.x - rad.x; xx <= coords.x + rad.x; xx++)
 				for (let yy = coords.y - rad.y; yy <= coords.y + rad.y; yy++)
 				for (let zz = coords.z - rad.z; zz <= coords.z + rad.z; zz++) {
-					let blockID = World.getBlockID(xx, yy, zz);
-					let material = ToolAPI.getBlockMaterial(blockID);
+					const blockID = World.getBlockID(xx, yy, zz);
+					const material = ToolAPI.getBlockMaterial(blockID);
 					if (material && (material.name == "dirt" || material.name == "stone")) {
 						let destroyTime = Block.getDestroyTime(blockID) / material.multiplier;
 						if (ToolAPI.getBlockDestroyLevel(blockID) <= this.toolMaterial.level) {
@@ -106,20 +106,20 @@ implements IModeSwitchable {
 
 	onDestroy(item: ItemInstance, coords: Callback.ItemUseCoordinates, block: Tile, player: number): boolean {
 		this.playDestroySound(item, block, player);
-		let region = WorldRegion.getForActor(player);
-		let mode = this.readMode(item.extra);
+		const region = WorldRegion.getForActor(player);
+		const mode = this.readMode(item.extra);
 		let material = ToolAPI.getBlockMaterialName(block.id);
-		let energyStored = ChargeItemRegistry.getEnergyStored(item);
+		const energyStored = ChargeItemRegistry.getEnergyStored(item);
 		if (mode == 3 && (material == "dirt" || material == "stone") && energyStored >= this.energyPerUse) {
 			let consume = 0;
-			let rad = this.getOperationRadius(coords.side);
+			const rad = this.getOperationRadius(coords.side);
 			for (let xx = coords.x - rad.x; xx <= coords.x + rad.x; xx++)
 			for (let yy = coords.y - rad.y; yy <= coords.y + rad.y; yy++)
 			for (let zz = coords.z - rad.z; zz <= coords.z + rad.z; zz++) {
 				if (xx == coords.x && yy == coords.y && zz == coords.z) {
 					continue;
 				}
-				let blockID = region.getBlockId(xx, yy, zz);
+				const blockID = region.getBlockId(xx, yy, zz);
 				material = ToolAPI.getBlockMaterialName(blockID);
 				if (material == "dirt" || material == "stone") {
 					consume += this.energyPerUse;

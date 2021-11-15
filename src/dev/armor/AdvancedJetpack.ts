@@ -19,7 +19,7 @@ class AdvancedJetpack extends ArmorBatpack {
 	}
 
 	onTick(item: ItemInstance, index: number, playerUid: number): ItemInstance {
-		let stack = super.onTick(item, index, playerUid);
+		const stack = super.onTick(item, index, playerUid);
 		return JetpackProvider.onTick(item, playerUid) || stack;
 	}
 }

@@ -10,9 +10,9 @@ implements IModeSwitchable {
 	}
 
 	onModeSwitch(item: ItemInstance, player: number): void {
-		let client = Network.getClientForPlayer(player);
-		let extra = item.extra || new ItemExtraData();
-		let silktouchMode = !extra.getBoolean("silktouch");
+		const client = Network.getClientForPlayer(player);
+		const extra = item.extra || new ItemExtraData();
+		const silktouchMode = !extra.getBoolean("silktouch");
 		extra.putBoolean("silktouch", silktouchMode);
 		if (silktouchMode) {
 			BlockEngine.sendUnlocalizedMessage(client, "§2", "message.silktouch.enabled");
@@ -40,7 +40,7 @@ implements IModeSwitchable {
 	onDestroy(item: ItemInstance, coords: Callback.ItemUseCoordinates, block: Tile, player: number): boolean {
 		if (item.extra?.getBoolean("silktouch") && ToolAPI.getBlockMaterialName(block.id) == "plant") {
 			if (ICore.Tool.dischargeItem(item, this.energyPerUse, player)) {
-				let region = WorldRegion.getForActor(player);
+				const region = WorldRegion.getForActor(player);
 				region.destroyBlock(coords);
 				if (block.id == 175) block.data = block.data%8;
 				region.dropItem(coords.x + .5, coords.y + .5, coords.z + .5, block.id, 1, block.data);

@@ -66,7 +66,7 @@ implements IWrech, IModeSwitchable {
 			break;
 		}
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
-		ICore.Sound.playSoundAtEntity(player, "ToolChange");
+		ICore.Sound.playSoundAtEntity(player, "ToolChange", 0.6);
 	}
 
 	isUseable(item: ItemInstance, damage: number): boolean {

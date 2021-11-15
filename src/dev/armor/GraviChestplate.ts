@@ -11,8 +11,8 @@ class GraviChestplate extends ArmorQuantumSuit {
 	}
 
 	onTick(item: ItemInstance, index: number, player: number): ItemInstance {
-		let flyEnabled = item.extra? item.extra.getBoolean("fly") : false;
-		let energyStored = ChargeItemRegistry.getEnergyStored(item);
+		const flyEnabled = item.extra? item.extra.getBoolean("fly") : false;
+		const energyStored = ChargeItemRegistry.getEnergyStored(item);
 		if (energyStored > 0) {
 			Entity.setFire(player, 0, true);
 			if (World.getThreadTime() % 20 == 0) {
@@ -20,10 +20,9 @@ class GraviChestplate extends ArmorQuantumSuit {
 				if (flyEnabled) {
 					newEnergyStored = Math.max(newEnergyStored - 50000, 0);
 				}
-				let carried = Entity.getCarriedItem(player);
+				const carried = Entity.getCarriedItem(player);
 				if (ChargeItemRegistry.isValidItem(carried.id, "Eu", this.tier)) {
-					let energyStored = ChargeItemRegistry.getEnergyStored(item);
-					let energyAdd = ChargeItemRegistry.addEnergyTo(carried, "Eu", Math.min(energyStored, this.transferLimit*20), this.tier);
+					const energyAdd = ChargeItemRegistry.addEnergyTo(carried, "Eu", Math.min(newEnergyStored, this.transferLimit*20), this.tier);
 					if (energyAdd > 0) {
 						newEnergyStored -= energyAdd
 						Entity.setCarriedItem(player, carried.id, 1, carried.data, carried.extra);
@@ -46,7 +45,7 @@ class GraviChestplate extends ArmorQuantumSuit {
 
 let canFly = false;
 Callback.addCallback("LocalTick", function() {
-	let armor = Player.getArmorSlot(1);
+	const armor = Player.getArmorSlot(1);
 	if (Game.getGameMode() != 1) {
 		if (armor.id == ItemID.graviChestplate && armor.extra && armor.extra.getBoolean("fly")) {
 			Player.setFlyingEnabled(true);

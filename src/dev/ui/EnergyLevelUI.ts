@@ -35,16 +35,16 @@ namespace EnergyLevelUI {
 	}
 
 	function onUpdate(): void {
-		let armor = Player.getArmorSlot(1);
+		const armor = Player.getArmorSlot(1);
 		if (isEnabledFor(armor.id) && currentUIscreen == "in_game_play_screen") {
 			if (!container || !container.isOpened()) {
 				container = new UI.Container();
 				container.openAs(window);
 			}
-			let maxCharge = ChargeItemRegistry.getMaxCharge(armor.id);
-			let energyStored = ChargeItemRegistry.getEnergyStored(armor);
-			let charge = Math.ceil(energyStored/maxCharge*100);
-			let element = window.getContent().elements.text2 as UI.UITextElement;
+			const maxCharge = ChargeItemRegistry.getMaxCharge(armor.id);
+			const energyStored = ChargeItemRegistry.getEnergyStored(armor);
+			const charge = Math.ceil(energyStored/maxCharge*100);
+			const element = window.getContent().elements.text2 as UI.UITextElement;
 			if (charge <= 1) {
 				element.font.color = android.graphics.Color.RED;
 			} else if (charge <= 10) {

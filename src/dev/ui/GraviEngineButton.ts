@@ -8,9 +8,9 @@ class GraviEngineButton extends ICore.UI.AbstractButton {
 	}
 
 	onClick(player: number) {
-		let client = Network.getClientForPlayer(player);
-		let armor = Entity.getArmorSlot(player, 1);
-		let extra = armor.extra || new ItemExtraData();
+		const client = Network.getClientForPlayer(player);
+		const armor = Entity.getArmorSlot(player, 1);
+		const extra = armor.extra || new ItemExtraData();
 		if (extra.getBoolean("fly")) {
 			extra.putBoolean("fly", false);
 			BlockEngine.sendUnlocalizedMessage(client, "message.graviChestPlate.disabled", "§4");
@@ -26,7 +26,7 @@ class GraviEngineButton extends ICore.UI.AbstractButton {
 	}
 
 	onUpdate(element: UI.UIButtonElement) {
-		let extra = Player.getArmorSlot(1).extra;
+		const extra = Player.getArmorSlot(1).extra;
 		if (extra && extra.getBoolean("fly")) {
 			element.bitmap = "button_gravi_on";
 		} else {

@@ -13,10 +13,10 @@ class AdvancedNanoChestplate extends ArmorNanoSuit {
 	onTick(item: ItemInstance, index: number, playerUid: number): ItemInstance {
 		let stack = null;
 		if (World.getThreadTime() % 20 == 0) {
-			let carried = Entity.getCarriedItem(playerUid);
+			const carried = Entity.getCarriedItem(playerUid);
 			if (ChargeItemRegistry.isValidItem(carried.id, "Eu", this.tier)) {
-				let energyStored = ChargeItemRegistry.getEnergyStored(item);
-				let energyAdd = ChargeItemRegistry.addEnergyTo(carried, "Eu", Math.min(energyStored, this.transferLimit*20), this.tier);
+				const energyStored = ChargeItemRegistry.getEnergyStored(item);
+				const energyAdd = ChargeItemRegistry.addEnergyTo(carried, "Eu", Math.min(energyStored, this.transferLimit*20), this.tier);
 				if (energyAdd > 0) {
 					ChargeItemRegistry.setEnergyStored(item, energyStored - energyAdd);
 					Entity.setCarriedItem(playerUid, carried.id, 1, carried.data, carried.extra);
