@@ -492,7 +492,6 @@ declare namespace Agriculture {
 declare namespace Agriculture {
 }
 declare namespace IC2Config {
-    let debugMode: boolean;
     let soundEnabled: boolean;
     let machineSoundEnabled: boolean;
     let voltageEnabled: boolean;
@@ -1742,7 +1741,7 @@ declare namespace Machine {
         isEmptyBlock(block: Tile): boolean;
         canBeDestroyed(blockID: number, level: number): boolean;
         findPath(x: number, y: number, z: number, sprc: number, level: number): Vector;
-        mineBlock(x: number, y: number, z: number, block: Tile, item: ItemInstance): void;
+        mineBlock(x: number, y: number, z: number, block: Tile, item: ItemContainerSlot): void;
         setPipe(y: number): void;
         drop(items: ItemInstance[]): void;
         onTick(): void;
