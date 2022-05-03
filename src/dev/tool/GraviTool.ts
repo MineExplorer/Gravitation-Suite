@@ -1,7 +1,5 @@
 class GraviTool extends ElectricTool
 implements IWrech, IModeSwitchable {
-	dropChance = 1;
-
 	constructor() {
 		super("graviTool", "gravi_tool", 300000, 10000, 3);
 		this.setToolParams({energyPerUse: 50, level: 4, efficiency: 16.2, blockMaterials: ["plant"]});
@@ -126,7 +124,7 @@ implements IWrech, IModeSwitchable {
 					coords.relative.x + 0.5,
 					coords.relative.y + 0.5,
 					coords.relative.z + 0.5,
-					ItemID.latex, randomInt(1, 3), 0
+					ItemID.latex, MathUtil.randomInt(1, 3), 0
 				),
 				(coords.relative.x - coords.x) * 0.25,
 				(coords.relative.y - coords.y) * 0.25,

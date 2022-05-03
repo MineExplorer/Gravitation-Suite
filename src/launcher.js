@@ -5,7 +5,7 @@ ConfigureMultiplayer({
 ModAPI.addAPICallback("ICore", function(api){
   Launch({
 	  ICore: api,
-    randomInt: api.requireGlobal("randomInt"),
+    MathUtil: api.requireGlobal("MathUtil"),
     JetpackProvider: api.requireGlobal("JetpackProvider"),
     ArmorBatpack: api.requireGlobal("ArmorBatpack"),
     ArmorNanoSuit: api.requireGlobal("ArmorNanoSuit"),
