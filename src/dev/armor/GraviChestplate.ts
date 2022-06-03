@@ -1,6 +1,6 @@
 class GraviChestplate extends ArmorQuantumSuit {
 	constructor() {
-		super("graviChestplate", "gravi_chestplate", {type: "chestplate", defence: 9, texture: "graviChestplate"}, false);
+		super("graviChestplate", "gravi_chestplate", {type: "chestplate", defence: 9, knockbackResistance: 2, texture: "graviChestplate"}, false);
 		this.setRarity(EnumRarity.EPIC);
 		this.maxCharge = 6e7;
 		this.transferLimit = 100000;
