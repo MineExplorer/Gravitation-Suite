@@ -596,8 +596,8 @@ declare namespace ItemName {
     /**@deprecated */
     function getRarity(id: number): number;
     function addTooltip(id: number, tooltip: string): void;
-    function addTierTooltip(stringID: string, tier: number): void;
-    function addStorageBlockTooltip(stringID: string, tier: number, capacity: string): void;
+    function addTierTooltip(blockID: string | number, tier: number): void;
+    function addStorageBlockTooltip(blockID: string | number, tier: number, capacity: string): void;
     function getBlockStorageText(item: ItemInstance, tier: number, capacity: string): string;
     function getPowerTierText(tier: number): string;
     function getItemStorageText(item: ItemInstance): string;
@@ -1113,8 +1113,16 @@ declare namespace Machine {
         defaultValues: {
             energy: number;
             output: number;
+            biome: any;
+            ticker: number;
+            blockCount: number;
         };
-        biomeCheck(x: number, z: number): "ocean" | "river";
+        BASE_POWER: number;
+        isOcean(biome: number): boolean;
+        isRiver(biome: number): boolean;
+        getBiome(x: number, z: number): number;
+        onInit(): void;
+        updateBlockCount(): void;
         energyTick(type: string, src: EnergyTileNode): void;
         canRotate(side: number): boolean;
     }
@@ -2183,6 +2191,7 @@ declare class ArmorJetpackElectric extends ArmorElectric {
 declare class ArmorBatpack extends ArmorElectric {
     constructor(stringID: string, name: string, maxCharge: number, transferLimit: number, tier: number);
     onTick(item: ItemInstance, index: number, playerUid: number): ItemInstance;
+    static chargeCarriedItem(itemData: IElectricItem, stack: ItemInstance, playerUid: number): ItemInstance;
 }
 declare class ArmorNightvisionGoggles extends ArmorElectric {
     constructor();
@@ -2288,8 +2297,8 @@ declare const guiContainmentBox: UI.StandartWindow;
 declare class DebugItem extends ItemElectric {
     canProvideEnergy: boolean;
     constructor();
-    onCharge(item: ItemInstance, amount: number, tier: number): number;
-    onDischarge(item: ItemInstance, amount: number, tier: number): number;
+    onCharge(item: ItemInstance, amount: number, tier: number, addAll: boolean): number;
+    onDischarge(item: ItemInstance, amount: number, tier: number, getAll: boolean): number;
     onNameOverride(item: ItemInstance, name: string): string;
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;
 }
@@ -2308,7 +2317,9 @@ declare class EUMeterUpdatable {
     openGuiFor(client: NetworkClient): void;
     resetValues(): void;
     tick(): void;
-    displayValue(value: number, unit: string): string;
+    getUnit(): string;
+    getValue(): number;
+    displayValue(value: number): string;
     destroy(): void;
 }
 declare class EUMeter extends ItemCommon implements ItemBehavior {
@@ -2516,7 +2527,6 @@ declare class UpgradeMFSU extends ItemCommon implements ItemBehavior {
     constructor();
     onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, block: Tile, player: number): void;
 }
-declare const painterCreativeGroup: number[];
 declare const ICore: {
     Machine: typeof MachineRegistry;
     Recipe: typeof MachineRecipeRegistry;

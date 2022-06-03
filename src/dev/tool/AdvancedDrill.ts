@@ -18,8 +18,7 @@ implements IModeSwitchable {
 	}
 
 	readMode(extra: ItemExtraData): number {
-		if (!extra) return 0;
-		return extra.getInt("mode");
+		return extra?.getInt("mode") || 0;
 	}
 
 	getModeName(mode: number): string {
@@ -106,32 +105,41 @@ implements IModeSwitchable {
 
 	onDestroy(item: ItemInstance, coords: Callback.ItemUseCoordinates, block: Tile, player: number): boolean {
 		this.playDestroySound(item, block, player);
-		const region = WorldRegion.getForActor(player);
 		const mode = this.readMode(item.extra);
-		let material = ToolAPI.getBlockMaterialName(block.id);
+		const material = ToolAPI.getBlockMaterialName(block.id);
 		const energyStored = ChargeItemRegistry.getEnergyStored(item);
-		if (mode == 3 && (material == "dirt" || material == "stone") && energyStored >= this.energyPerUse) {
-			let consume = 0;
-			const rad = this.getOperationRadius(coords.side);
-			for (let xx = coords.x - rad.x; xx <= coords.x + rad.x; xx++)
-			for (let yy = coords.y - rad.y; yy <= coords.y + rad.y; yy++)
-			for (let zz = coords.z - rad.z; zz <= coords.z + rad.z; zz++) {
-				if (xx == coords.x && yy == coords.y && zz == coords.z) {
-					continue;
-				}
-				const blockID = region.getBlockId(xx, yy, zz);
-				material = ToolAPI.getBlockMaterialName(blockID);
-				if (material == "dirt" || material == "stone") {
-					consume += this.energyPerUse;
-					region.destroyBlock(xx, yy, zz, true, player);
-					if (energyStored < consume + this.energyPerUse) {
-						ICore.Tool.dischargeItem(item, consume, player);
-						return true;
-					}
-				}
+		if (mode == 3 && (material == "dirt" || material == "stone") && energyStored >= this.energyPerUse * 2) {
+			const consume = this.destroy3x3Area(coords, player, energyStored);
+			if (consume > 0) {
+				ICore.Tool.dischargeItem(item, consume, player);
 			}
-			if (consume > 0) ICore.Tool.dischargeItem(item, consume, player);
+		}
+		else if (Block.getDestroyTime(block.id) > 0) {
+			ICore.Tool.dischargeItem(item, this.energyPerUse, player);
 		}
 		return true;
+	}
+
+	private destroy3x3Area(coords: Callback.ItemUseCoordinates, player: number, energyStored: number): number {
+		const region = WorldRegion.getForActor(player);
+		let consume = this.energyPerUse;
+		const rad = this.getOperationRadius(coords.side);
+		for (let xx = coords.x - rad.x; xx <= coords.x + rad.x; xx++)
+		for (let yy = coords.y - rad.y; yy <= coords.y + rad.y; yy++)
+		for (let zz = coords.z - rad.z; zz <= coords.z + rad.z; zz++) {
+			if (xx == coords.x && yy == coords.y && zz == coords.z) {
+				continue;
+			}
+			const blockID = region.getBlockId(xx, yy, zz);
+			const material = ToolAPI.getBlockMaterialName(blockID);
+			if (material == "dirt" || material == "stone") {
+				consume += this.energyPerUse;
+				region.destroyBlock(xx, yy, zz, true, player);
+				if (energyStored < consume + this.energyPerUse) {
+					return consume;
+				}
+			}
+		}
+		return consume;
 	}
 }

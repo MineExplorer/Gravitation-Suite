@@ -15,23 +15,13 @@ class GraviChestplate extends ArmorQuantumSuit {
 		const energyStored = ChargeItemRegistry.getEnergyStored(item);
 		if (energyStored > 0) {
 			Entity.setFire(player, 0, true);
-			if (World.getThreadTime() % 20 == 0) {
-				let newEnergyStored = energyStored;
-				if (flyEnabled) {
-					newEnergyStored = Math.max(newEnergyStored - 50000, 0);
-				}
-				const carried = Entity.getCarriedItem(player);
-				if (ChargeItemRegistry.isValidItem(carried.id, "Eu", this.tier)) {
-					const energyAdd = ChargeItemRegistry.addEnergyTo(carried, "Eu", Math.min(newEnergyStored, this.transferLimit*20), this.tier);
-					if (energyAdd > 0) {
-						newEnergyStored -= energyAdd
-						Entity.setCarriedItem(player, carried.id, 1, carried.data, carried.extra);
-					}
-				}
-				if (energyStored != newEnergyStored) {
-					ChargeItemRegistry.setEnergyStored(item, newEnergyStored);
-					return item;
-				}
+			let discharged = false;
+			if (World.getThreadTime() % 20 == 0 && flyEnabled) {
+				ChargeItemRegistry.setEnergyStored(item, Math.max(energyStored - 50000, 0));
+				discharged = true;
+			}
+			if (ArmorBatpack.chargeCarriedItem(this, item, player) || discharged) {
+				return item;
 			}
 		}
 		else if (flyEnabled) {
