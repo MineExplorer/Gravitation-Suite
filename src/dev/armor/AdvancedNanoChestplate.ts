@@ -11,7 +11,7 @@ class AdvancedNanoChestplate extends ArmorNanoSuit {
 	}
 
 	onTick(item: ItemInstance, index: number, playerUid: number): ItemInstance {
-		const stack = ArmorBatpack.chargeCarriedItem(this, item, playerUid);
-		return JetpackProvider.onTick(item, playerUid) || stack;
+		const stack = JetpackProvider.onTick(item, playerUid);
+		return ArmorBatpack.chargeCarriedItem(this, item, playerUid) || stack;
 	}
 }
