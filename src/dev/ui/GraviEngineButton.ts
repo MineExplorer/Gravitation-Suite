@@ -13,14 +13,14 @@ class GraviEngineButton extends ICore.UI.AbstractButton {
 		const extra = armor.extra || new ItemExtraData();
 		if (extra.getBoolean("fly")) {
 			extra.putBoolean("fly", false);
-			BlockEngine.sendUnlocalizedMessage(client, "message.graviChestPlate.disabled", "§4");
+			BlockEngine.sendMessage(client, "§4", "message.graviChestPlate.disabled");
 		}
 		else if (ChargeItemRegistry.getEnergyStored(armor) >= 2500) {
 			extra.putBoolean("fly", true);
-			BlockEngine.sendUnlocalizedMessage(client, "message.graviChestPlate.enabled", "§2");
+			BlockEngine.sendMessage(client, "§2", "message.graviChestPlate.enabled");
 		}
 		else {
-			BlockEngine.sendUnlocalizedMessage(client, "message.graviChestPlate.lowEnergy");
+			BlockEngine.sendMessage(client, "message.graviChestPlate.lowEnergy");
 		}
 		Entity.setArmorSlot(player, 1, armor.id, 1, armor.data, extra);
 	}

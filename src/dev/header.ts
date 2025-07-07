@@ -1,7 +1,5 @@
 IMPORT("BlockEngine");
 IMPORT("ChargeItem");
 
-const BlockSide = Native.BlockSide;
-
-ICore.Sound.setResourcePath(__dir__ + "assets/sounds/");
-ICore.Sound.registerSound("ToolChange", "ToolChange.ogg");
+ICore.Sound.Registry.setBasePath(__dir__ + "assets/sounds/");
+ICore.Sound.Registry.registerSound("ToolChange", "ToolChange.ogg");

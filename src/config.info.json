@@ -1,0 +1,47 @@
+{
+    "properties": {
+        "enabled": {
+            "name": {
+                "en": "Enable mod",
+                "ru": "Включить мод"
+            }
+        },
+        "change_quantum_suit_recipe": {
+            "name": {
+                "en": "Change Quantum Chestplate recipe",
+                "ru": "Изменить рецепт Квантового Нагрудника"
+            }
+        },
+        "change_ir_drill_recipe": {
+            "name": {
+                "en": "Change Quantum Chestplate Recipe",
+                "ru": "Изменить рецепт Иридиевого Бура"
+            }
+        },
+        "energy_text": {
+            "name": {
+                "en": "Energy level HUD text",
+                "ru": "Текст уровня энергии"
+            },
+            "collapsible": true
+        },
+        "energy_text.scale": {
+            "name": {
+                "en": "Scale",
+                "ru": "Масштаб"
+            }
+        },
+        "energy_text.pos": {
+            "name": {
+                "en": "Horizontal position: left, center or right",
+                "ru": "Горизонтальная позиция: left, center или right"
+            }
+        },
+        "energy_text.y": {
+            "name": {
+                "en": "Vertical position in pixels",
+                "ru": "Вертикальная позиция в пикселях"
+            }
+        }
+    }
+}

@@ -59,17 +59,17 @@ implements IModeSwitchable {
 		const extra = item.extra || new ItemExtraData();
 		const mode = (extra.getInt("mode") + 1) % 4;
 		extra.putInt("mode", mode);
-		BlockEngine.sendUnlocalizedMessage(client, this.getModeChatColor(mode), "Mode: ", this.getModeName(mode));
+		BlockEngine.sendMessage(client, this.getModeChatColor(mode), "Mode: %s", this.getModeName(mode))
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
 	}
 
 	getOperationRadius(side: number): Vector {
 		const rad = {x: 1, y: 1, z: 1};
-		if (side == BlockSide.EAST || side == BlockSide.WEST)
+		if (side == EBlockSide.EAST || side == EBlockSide.WEST)
 			rad.x = 0;
-		if (side == BlockSide.UP || side == BlockSide.DOWN)
+		if (side == EBlockSide.UP || side == EBlockSide.DOWN)
 			rad.y = 0;
-		if (side == BlockSide.NORTH || side == BlockSide.SOUTH)
+		if (side == EBlockSide.NORTH || side == EBlockSide.SOUTH)
 			rad.z = 0;
 		return rad;
 	}
@@ -104,7 +104,7 @@ implements IModeSwitchable {
 	}
 
 	onDestroy(item: ItemInstance, coords: Callback.ItemUseCoordinates, block: Tile, player: number): boolean {
-		this.playDestroySound(item, block, player);
+		this.playDestroySound(coords, item, block, player);
 		const mode = this.readMode(item.extra);
 		const material = ToolAPI.getBlockMaterialName(block.id);
 		const energyStored = ChargeItemRegistry.getEnergyStored(item);

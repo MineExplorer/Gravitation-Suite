@@ -51,16 +51,16 @@ implements IWrech, IModeSwitchable {
 		extra.putInt("mode", mode);
 		switch (mode) {
 			case 0:
-				BlockEngine.sendUnlocalizedMessage(client, "§2", "message.graviTool.hoe");
+				BlockEngine.sendMessage(client, "§2", "message.graviTool.hoe");
 			break;
 			case 1:
-				BlockEngine.sendUnlocalizedMessage(client, "§6", "message.graviTool.treetap");
+				BlockEngine.sendMessage(client, "§6", "message.graviTool.treetap");
 			break;
 			case 2:
-				BlockEngine.sendUnlocalizedMessage(client, "§b", "message.graviTool.wrench");
+				BlockEngine.sendMessage(client, "§b", "message.graviTool.wrench");
 			break;
 			case 3:
-				BlockEngine.sendUnlocalizedMessage(client, "§5", "message.graviTool.screwdriver");
+				BlockEngine.sendMessage(client, "§5", "message.graviTool.screwdriver");
 			break;
 		}
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
@@ -117,7 +117,7 @@ implements IWrech, IModeSwitchable {
 		}
 		else if (mode == 1 && block.id == BlockID.rubberTreeLogLatex && block.data >= 4 && block.data == coords.side + 2 && ICore.Tool.useElectricItem(item, 50, player)) {
 			const region = WorldRegion.getForActor(player);
-			ICore.Sound.playSoundAt(coords.vec.x, coords.vec.y, coords.vec.z, "Treetap.ogg");
+			ICore.Sound.playSoundAt(coords.vec.x, coords.vec.y, coords.vec.z, region.getDimension(), "Treetap.ogg");
 			region.setBlock(coords, BlockID.rubberTreeLogLatex, block.data - 4);
 			Entity.setVelocity(
 				region.dropItem(

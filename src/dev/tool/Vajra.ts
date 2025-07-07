@@ -15,10 +15,10 @@ implements IModeSwitchable {
 		const silktouchMode = !extra.getBoolean("silktouch");
 		extra.putBoolean("silktouch", silktouchMode);
 		if (silktouchMode) {
-			BlockEngine.sendUnlocalizedMessage(client, "§2", "message.silktouch.enabled");
+			BlockEngine.sendMessage(client, "§2", "message.silktouch.enabled");
 		}
 		else {
-			BlockEngine.sendUnlocalizedMessage(client, "§4", "message.silktouch.disabled");
+			BlockEngine.sendMessage(client, "§4", "message.silktouch.disabled");
 		}
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
 	}

@@ -43,13 +43,13 @@ declare class SoundManagerClient {
     musicVolume: number;
     soundPool: android.media.SoundPool;
     maxStreams: number;
-    constructor(maxStreamsCount: number, globalVolume: number, sounds: Sound[]);
+    constructor(maxStreamsCount: number, globalVolume: number);
     readSettings(): void;
     getSoundVolume(): number;
     getMusicVolume(): number;
     loadSounds(sounds: Sound[]): void;
     /**
-     * Starts playing ssoundVolumeound and returns its streamId or 0 if failes to play sound.
+     * Starts playing sound and returns its streamId or 0 if failes to play sound.
      * @param sound sound name or object
      * @param looping true if sound is looped, false otherwise
      * @param volume value from 0 to 1
@@ -74,11 +74,11 @@ declare namespace SoundLib {
      */
     function getClient(): Nullable<SoundManagerClient>;
     /**
-     * Initializes client side code if the current instance of game has a client
+     * Initializes client side code if the current instance of game is not a dedicated server
      * @param maxStreamsCount max count of concurrently playing streams
      * @param globalVolume volume modifier for all sounds
      */
-    function init(maxStreamsCount: number, globalVolume?: number): void;
+    function initClient(maxStreamsCount: number, globalVolume?: number): void;
     /**
      * Plays sound at coords
      * @param coords coords
@@ -96,35 +96,35 @@ declare namespace SoundLib {
      * @param z z coord
      * @param dimension dimension
      * @param soundName sound name
-     * @param radius radius in blocks, 16 by default
      * @param volume value from 0 to 1
      * @param pitch value from 0 to 1
+     * @param radius radius in blocks, 16 by default
      */
-    function playSoundAt(x: number, y: number, z: number, dimension: number, soundName: string, radius?: number, volume?: number, pitch?: number): void;
+    function playSoundAt(x: number, y: number, z: number, dimension: number, soundName: string, volume?: number, pitch?: number, radius?: number): void;
     /**
      * Plays sound at entity coords and dimension
      * @param entity entity id
      * @param soundName sound name
-     * @param radius radius in blocks, 16 by default
      * @param volume value from 0 to 1
      * @param pitch value from 0 to 1
+     * @param radius radius in blocks, 16 by default
      */
-    function playSoundAtEntity(entity: number, soundName: string, radius?: number, volume?: number, pitch?: number): void;
+    function playSoundAtEntity(entity: number, soundName: string, volume?: number, pitch?: number, radius?: number): void;
     /**
      * Plays sound at center of the block
      * @param coords block coords
      * @param dimension dimension
      * @param soundName sound name
-     * @param radius radius in blocks, 16 by default
      * @param volume value from 0 to 1
      * @param pitch value from 0 to 1
+     * @param radius radius in blocks, 16 by default
      */
-    function playSoundAtBlock(coords: Vector, dimension: number, soundName: string, radius?: number, volume?: number, pitch?: number): void;
+    function playSoundAtBlock(coords: Vector, dimension: number, soundName: string, volume?: number, pitch?: number, radius?: number): void;
 }
 declare class Sound {
     name: string;
     path: string;
-    internalId: number;
+    internalId?: number;
     private duration;
     /**
      * @param name sound name id
@@ -132,6 +132,7 @@ declare class Sound {
      */
     constructor(name: string, path: string);
     load(soundPool: android.media.SoundPool): void;
+    isLoaded(): boolean;
     getDuration(): number;
 }
 declare class MultiSound {
