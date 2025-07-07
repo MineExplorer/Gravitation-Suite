@@ -3,7 +3,7 @@
 		"info": {
 			"name": "Gravitation Suite",
 			"author": "Mine Explorer",
-			"version": "2.3.1",
+			"version": "2.4",
 			"description": "Advanced tools and armor for IC2",
 			"icon": "src/icon.png"
 		},
@@ -22,7 +22,7 @@
 		],
 		"excludeFromRelease": [],
 		"modFolder": "GraviSuite",
-		"pushTo": "storage/emulated/0/games/horizon/packs/Inner_Core/innercore/mods/",
+		"pushTo": "sdcard/games/horizon/packs/Inner_Core__ARM64_/innercore/mods/",
 		"ndkPath": null
 	},
 	"resources": [
