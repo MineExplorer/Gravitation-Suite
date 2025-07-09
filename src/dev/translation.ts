@@ -22,6 +22,7 @@ Translation.addTranslation("ultimate_lappack", {en: "Ultimate Lappack", ru: "С�
 Translation.addTranslation("advanced_jetpack", {en: "Advanced Jetpack", ru: "Улучшенный джетпак", zh: "进阶电力喷气背包"});
 
 // Text
+Translation.addTranslation("message.mode", {en: "Mode: %s", ru: "Режим: %s", es: "Modo: %s", pt: "Modo: %s", zh: "模式: %s"});
 Translation.addTranslation("message.advancedDrill.normal", {en: "Normal", ru: "Нормальный"});
 Translation.addTranslation("message.advancedDrill.lowPower", {en: "Low power", ru: "Низкое питание"});
 Translation.addTranslation("message.advancedDrill.fine", {en: "Fine", ru: "Точный"});

@@ -3,7 +3,7 @@
 		"info": {
 			"name": "Gravitation Suite",
 			"author": "Mine Explorer",
-			"version": "2.4",
+			"version": "2.4.1",
 			"description": "Advanced tools and armor for IC2",
 			"icon": "src/icon.png"
 		},

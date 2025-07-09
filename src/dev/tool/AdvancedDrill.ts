@@ -50,8 +50,8 @@ implements IModeSwitchable {
 	onNameOverride(item: ItemInstance, name: string): string {
 		name = super.onNameOverride(item, name);
 		const mode = this.readMode(item.extra);
-		const tooltip = this.getModeChatColor(mode) + Translation.translate("Mode: ") + Translation.translate(this.getModeName(mode));
-		return name + "\n" + tooltip;
+		const modeName = Translation.translate("message.mode").replace("%s", Translation.translate(this.getModeName(mode)));
+		return name + "\n" + this.getModeChatColor(mode) + modeName;
 	}
 
 	onModeSwitch(item: ItemInstance, player: number): void {
@@ -59,7 +59,7 @@ implements IModeSwitchable {
 		const extra = item.extra || new ItemExtraData();
 		const mode = (extra.getInt("mode") + 1) % 4;
 		extra.putInt("mode", mode);
-		BlockEngine.sendMessage(client, this.getModeChatColor(mode), "Mode: %s", this.getModeName(mode))
+		BlockEngine.sendMessage(client, this.getModeChatColor(mode), "message.mode", this.getModeName(mode))
 		Entity.setCarriedItem(player, item.id, 1, item.data, extra);
 	}
 
