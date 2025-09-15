@@ -7,7 +7,7 @@ implements IWrech, IModeSwitchable {
 		ICore.UI.setButtonFor(this.id, "button_switch");
 		ICore.Tool.registerWrench(this.id, this);
 
-		ModAPI.addAPICallback("RedCore", (api: any) => {
+		ModAPI.addAPICallback("RedCore", (api: typeof RedCore) => {
 			api.Machine.registerScrewdriver(this.id, {
 				canBeUsed: (item: ItemInstance) => this.canBeUsedAsScrewdriver(item),
 				useItem: (item: ItemStack, player: number) => this.useAsScrewdriver(item, player)
