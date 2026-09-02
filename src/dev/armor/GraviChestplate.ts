@@ -17,7 +17,7 @@ class GraviChestplate extends ArmorQuantumSuit {
 			Entity.setFire(player, 0, true);
 			let discharged = false;
 			if (World.getThreadTime() % 20 == 0 && flyEnabled) {
-				ChargeItemRegistry.setEnergyStored(item, Math.max(energyStored - 50000, 0));
+				ChargeItemRegistry.setEnergyStored(item, Math.max(energyStored - 25000, 0));
 				discharged = true;
 			}
 			if (ArmorBatpack.chargeCarriedItem(this, item, player) || discharged) {
